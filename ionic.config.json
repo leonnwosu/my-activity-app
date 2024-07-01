@@ -1,0 +1,7 @@
+{
+  "name": "myActivity",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite"
+}
