@@ -48,16 +48,18 @@ const Home: React.FC = () => {
   const day = dayNames[currentTime.getDay()];
   const daynum = currentTime.getDate();
   const month = monthNames[currentTime.getMonth()];
-  const year = currentTime.getFullYear();
-  const time = currentTime.toLocaleTimeString();
+  const time = currentTime.toLocaleTimeString([], {
+    hour: '2-digit',
+    minute: '2-digit',
+  });
   return (
     <IonPage>
       <IonContent fullscreen color="primary">
-      <div className="mt-[128px] ml-[60px]">
+      <div className="container">
           <div className="display-time text-5xl text-white">{time}</div>
           <div className="display-date text-white">
             <span id="day">{day}</span>, <span id="daynum">{daynum}</span>{" "}
-            <span id="month">{month}</span> <span id="year">{year}</span>
+            <span id="month">{month}</span>
           </div>
         </div>
       </IonContent>
