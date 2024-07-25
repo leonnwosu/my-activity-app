@@ -7,15 +7,6 @@ import React, { useEffect, useState } from "react";
 
 const Home: React.FC = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentTime(new Date());
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, []);
-
   const dayNames = [
     "Sunday",
     "Monday",
