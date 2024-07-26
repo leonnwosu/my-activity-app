@@ -1,0 +1,35 @@
+.datetime-button-wrapper {
+    font-size: 24px; /* Adjust the size as needed */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 7%;
+  }
+  
+  .datetime-button-wrapper ion-button {
+    --padding-start: 40px; /* Adjust the padding as needed */
+    --padding-end: 40px;   /* Adjust the padding as needed */
+  }
+
+  .completebutton ion-button{
+    --padding-start: 5px; /* Adjust the padding as needed */
+    --padding-end: 5px;   /* Adjust the padding as needed */
+  }
+
+  .notcomplete ion-button{
+    --padding-start: 5px; /* Adjust the padding as needed */
+    --padding-end: 5px;   /* Adjust the padding as needed */
+
+  }
+
+.completebutton{
+    margin-left: 78px;
+}
+
+.notcomplete{
+    margin-left: 226px;
+}
+
+.showbutton{
+    display: inline-block;
+}
