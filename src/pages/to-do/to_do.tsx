@@ -47,6 +47,7 @@ const ToDo: React.FC = () => {
       });
       setNewToDo("");
     }
+    setShowModal(prevState=>!prevState);
   };
   const complete = () => {
     if (toDoItems[selectedDate]) {
