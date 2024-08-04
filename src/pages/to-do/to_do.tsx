@@ -12,7 +12,7 @@ import {
   IonItem,
   IonInput,
   IonLabel,
-  IonCheckbox
+  IonCheckbox,
 } from "@ionic/react";
 import ExploreContainer from "../../components/ExploreContainer";
 import "./to_do.css";
@@ -28,6 +28,9 @@ const ToDo: React.FC = () => {
   const [newToDo, setNewToDo] = useState<string>("");
   const [toDoItems, setToDoItems] = useState<{ [key: string]: ToDoItem[] }>({});
   const [showModal, setShowModal] = useState(false);
+  const [filter, setFilter] = useState<"all" | "complete" | "not_complete">(
+    "all"
+  );
 
   const handleDateChange = (e: CustomEvent) => {
     setSelectedDate(e.detail.value);
@@ -47,37 +50,20 @@ const ToDo: React.FC = () => {
       });
       setNewToDo("");
     }
-    setShowModal(prevState=>!prevState);
+    setShowModal((prevState) => !prevState);
   };
   const complete = () => {
     if (toDoItems[selectedDate]) {
-      let complete = [];
-      for (let x = 0; x < toDoItems[selectedDate].length; x++) {
-        if (toDoItems[selectedDate][x].completed) {
-          complete.push(toDoItems[selectedDate][x]);
-        }
-      }
-      if (complete != null) {
-        return complete;
-      } else {
-        return [];
-      }
+      return toDoItems[selectedDate].filter((item) => item.completed);
     }
+    return [];
   };
+
   const not_complete = () => {
     if (toDoItems[selectedDate]) {
-      let notcomplete = [];
-      for (let x = 0; x < toDoItems[selectedDate].length; x++) {
-        if (!toDoItems[selectedDate][x].completed) {
-          notcomplete.push(toDoItems[selectedDate][x]);
-        }
-      }
-      if (complete != null) {
-        return complete;
-      } else {
-        return [];
-      }
+      return toDoItems[selectedDate].filter((item) => !item.completed);
     }
+    return [];
   };
 
   const addToListModal = () => {
@@ -103,6 +89,23 @@ const ToDo: React.FC = () => {
       return { ...prevItems, [date]: itemsForDate };
     });
   };
+
+  const getFilteredItems = () => {
+    if (filter === "complete") {
+      return complete();
+    } else if (filter === "not_complete") {
+      return not_complete();
+    } else {
+      return toDoItems[selectedDate] || [];
+    }
+  };
+
+  const showComplete = () => setFilter("complete");
+  const showNotComplete = () => setFilter("not_complete");
+  const showAll = () => setFilter("all");
+
+  const filteredItems = getFilteredItems();
+
   return (
     <IonPage>
       <IonContent fullscreen color="primary">
@@ -119,7 +122,7 @@ const ToDo: React.FC = () => {
         </IonModal>
         <div className="showbutton">
           <IonButton
-            onClick={complete}
+            onClick={showComplete}
             color="favorite"
             className="completebutton"
           >
@@ -127,29 +130,37 @@ const ToDo: React.FC = () => {
           </IonButton>
 
           <IonButton
-            onClick={not_complete}
+            onClick={showNotComplete}
             color="favorite"
             className="notcomplete"
           >
             not complete
           </IonButton>
+
+          <IonButton
+            onClick={showAll}
+            color="favorite"
+            className="notcomplete"
+          >
+            Show All
+          </IonButton>
         </div>
         <IonList>
-        {toDoItems[selectedDate]?.map((item, index) => (
-                <IonItem key={index} color="primary">
-                  <IonCheckbox
-                    checked={item.completed}
-                    onIonChange={() => makedone(selectedDate, index)}
-                  />
-                  <IonLabel
-                    style={{
-                      textDecoration: item.completed ? "line-through" : "none",
-                    }}
-                  >
-                    {item.text}
-                  </IonLabel>
-                </IonItem>
-              ))}
+          {filteredItems.map((item, index) => (
+            <IonItem key={index} color="primary">
+              <IonCheckbox
+                checked={item.completed}
+                onIonChange={() => makedone(selectedDate, index)}
+              />
+              <IonLabel
+                style={{
+                  textDecoration: item.completed ? "line-through" : "none",
+                }}
+              >
+                {item.text}
+              </IonLabel>
+            </IonItem>
+          ))}
         </IonList>
         <IonButton onClick={addToListModal} expand="block" color="dark">
           ADD TO-DO
@@ -158,9 +169,9 @@ const ToDo: React.FC = () => {
           <div className="modal" color="primary">
             <IonItem>
               <IonInput
-                 value={newToDo}
-                 placeholder="Enter new to-do"
-                 onIonChange={(e) => setNewToDo(e.detail.value!)}
+                value={newToDo}
+                placeholder="Enter new to-do"
+                onIonChange={(e) => setNewToDo(e.detail.value!)}
               ></IonInput>
             </IonItem>
             <IonButton onClick={Addtolist} color="dark">
