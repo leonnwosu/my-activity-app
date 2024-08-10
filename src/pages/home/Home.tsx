@@ -55,7 +55,7 @@ const Home: React.FC = () => {
   return (
     <IonPage>
       <IonContent fullscreen color="primary">
-      <div className="container">
+      <div className="container mt-[90%]">
           <div className="display-time text-5xl text-white">{time}</div>
           <div className="display-date text-white">
             <span id="day">{day}</span>, <span id="daynum">{daynum}</span>{" "}
