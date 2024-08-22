@@ -1,3 +1,4 @@
+import { Redirect, Route, Switch, useRouteMatch } from "react-router-dom";
 import {
   IonButton,
   IonContent,
@@ -17,29 +18,31 @@ import {
 import ExploreContainer from "../../components/ExploreContainer";
 import "./activity.css";
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import AddActivity from "./add_activity"; // Rename and import correctly
 
-interface Actitem{
-  text : String;
-  time : String;
+interface ActItem {
+  text: string;
+  time: string;
 }
 
 const Activity: React.FC = () => {
-  const Add_activity =()=>{};
-  const countdown = ()=>{};
+  const addActivity = () => {
+    // Use backticks for string interpolation
+  };
 
-   
+  const countdown = () => {};
 
   return (
     <IonPage>
       <IonContent fullscreen color="primary">
-        <IonButton color="dark" expand="block" onClick={Add_activity}>
-          ADD
-        </IonButton>
-        <IonList color="primary">
+        <Link to="/add_activity">
+          <IonButton color="dark" expand="block" onClick={addActivity}>
+            ADD
+          </IonButton>
+        </Link>
 
-        </IonList>
-
-        
+        <IonList color="primary">{/* Add your list items here */}</IonList>
       </IonContent>
     </IonPage>
   );

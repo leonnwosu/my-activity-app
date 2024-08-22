@@ -10,13 +10,14 @@ import {
   setupIonicReact
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { bookOutline, ellipse, home, pulseOutline, square, triangle } from 'ionicons/icons';
+import { alarmOutline, bookOutline, ellipse, home, pulseOutline, square, triangle } from 'ionicons/icons';
 import Tab1 from './pages/Tab1';
 import Tab2 from './pages/Tab2';
 import Tab3 from './pages/Tab3';
 import Home from './pages/home/Home';
 import ToDo from './pages/to-do/to_do';
 import Activity from './pages/activity/activity';
+import AddActivity from './pages/activity/add_activity';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -67,6 +68,9 @@ const App: React.FC = () => (
           <Route exact path="/tab4">
             <Tab2 />
           </Route>
+          <Route  exact path = "/add_activity">
+           <AddActivity />
+          </Route>
         </IonRouterOutlet>
         <IonTabBar slot="bottom">
           <IonTabButton tab="home" href="/home">
@@ -82,8 +86,8 @@ const App: React.FC = () => (
             <IonLabel>Activity</IonLabel>
           </IonTabButton>
           <IonTabButton tab="tab2" href="/tab2">
-            <IonIcon aria-hidden="true" icon={square} />
-            <IonLabel>Tab 2</IonLabel>
+            <IonIcon aria-hidden="true" icon={alarmOutline} />
+            <IonLabel>Reminder</IonLabel>
           </IonTabButton>
         </IonTabBar>
       </IonTabs>
