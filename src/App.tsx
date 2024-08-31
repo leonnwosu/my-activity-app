@@ -18,6 +18,7 @@ import Home from './pages/home/Home';
 import ToDo from './pages/to-do/to_do';
 import Activity from './pages/activity/activity';
 import AddActivity from './pages/activity/add_activity';
+import Reminder from './pages/reminder/reminder';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -65,8 +66,8 @@ const App: React.FC = () => (
           <Route exact path="/activity">
             <Activity />
           </Route>
-          <Route exact path="/tab4">
-            <Tab2 />
+          <Route exact path="/reminder">
+            <Reminder />
           </Route>
           <Route  exact path = "/add_activity">
            <AddActivity />
@@ -85,7 +86,7 @@ const App: React.FC = () => (
             <IonIcon aria-hidden="true" icon={pulseOutline} />
             <IonLabel>Activity</IonLabel>
           </IonTabButton>
-          <IonTabButton tab="tab2" href="/tab2">
+          <IonTabButton tab="reminder" href="/reminder">
             <IonIcon aria-hidden="true" icon={alarmOutline} />
             <IonLabel>Reminder</IonLabel>
           </IonTabButton>
